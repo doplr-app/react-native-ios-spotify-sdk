@@ -14,7 +14,9 @@ It currently supports two types of authentication:
 Before installing the module, you have to install the Spotify iOS SDK.
 
 You can use this [tutorial](https://developer.spotify.com/technologies/spotify-ios-sdk/tutorial/). 
-Follow the steps `Creating Your Client ID, Secret and Callback URI`  and `Setting Up Your Build Environment`.
+Follow the steps `Creating a new Project` (not the creation of a blank project, only the import of Spotify 
+framework. Only the `SpotifyAuthentication` file is required) `Creating Your Client ID, Secret and Callback URI`  
+and `Setting Up Your Build Environment`.
 
 ### Copying the module's files
 
@@ -46,12 +48,15 @@ We're not exactly sure whether the `SpotifyAuthentication.framework` should be i
 
 You should now copy the `SpotifyModule.h` and `SpotifyModule.m` files into the `ios/myappname/` folder.
 
+Once it is done, right click (in XCode) on the folder called `myappname` in the project, click on `Add files to "myappname"` 
+and select the two files you just copied.
+
 ### Configuration of the `SpotifyModule.m` file
 
 Open `SpotifyModule.m` and find the following lines:
 ```objective-c
   // The spotify client id
-  [[SPTAuth defaultInstance] setClientID:@"d38b33a97aec4711815b66944d6ee088"];
+  [[SPTAuth defaultInstance] setClientID:@"[your-client-id]"];
   
   // The callback (called Custom URL Scheme in XCode project configuration)
   [[SPTAuth defaultInstance] setRedirectURL:[NSURL URLWithString:@"emphaz-app-login://callback"]];
@@ -92,6 +97,10 @@ For it to work, you have to edit your `ios/myappname/AppDelegate.m` file so that
 If you don't have the `- (BOOL) application: ...` method, add this at the end of `AppDelegate.m`:
 ```objective-c
 // ios/myappname/AppDelegate.m
+
+// ...
+
+#import "SpotifyModule.h"
 
 // ...
 
@@ -167,7 +176,17 @@ const SpotifyModule = NativeModules.SpotifyModule;
 
 You can then trigger the Authentication in any method you want, such as on button press:
 ```jsx
-export default class Login extends Component {
+
+import React, { Component } from 'react';
+import {
+  AppRegistry,
+  View,
+  TouchableHighlight,
+  Text,
+  NativeModules 
+} from 'react-native';
+
+class myappname extends Component {
   
   _onSpotifyButtonPress() {
     try {
@@ -189,6 +208,8 @@ export default class Login extends Component {
     );
   }
 }
+
+AppRegistry.registerComponent('myappname', () => myappname);
 ```
 
 It would output a JS object such as: 
