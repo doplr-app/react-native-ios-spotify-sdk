@@ -7,6 +7,16 @@ It currently supports two types of authentication:
 - The [implicit grant flow](https://developer.spotify.com/web-api/authorization-guide/#implicit-grant-flow) that generates a non-refreshable token. With this flow you don't have to host any *token swaping* service.
 - The [authorization code flow](https://developer.spotify.com/web-api/authorization-guide/#authorization-code-flow) that generates a refreshable token. You're provided with an *access_token* and a *refresh_token*.
 
+
+## Demonstration
+A boilerplate react-native project is available [here](https://github.com/Emphaz/react-native-spotify-ios-sdk-boilerplate).
+
+It comes preconfigured, you only have to adjust a few variable related to your own Spotify Application.
+
+You should still read the installation/usage guide since it provides a few information that might help you debug your application in
+case there is any issue.
+
+
 ## Installation
 
 ### Installing the Spotify iOS SDK
